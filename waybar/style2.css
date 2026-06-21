@@ -1,0 +1,37 @@
+window#waybar {
+    background: transparent;
+}
+
+#custom-launcher, #clock, #workspaces, #battery, #backlight, #pulseaudio, #network, #bluetooth, #custom-exit, #custom-spotify, #cpu, #custom-gpu, #memory, #custom-updates {
+    background: rgba(26, 27, 28, 0.85);
+    color: #e192ef;
+    border-radius: 50px;
+    padding: 0 8px 0 8px;
+    margin: 4px 2px;
+    font-size: 11px;
+    min-height: 0;
+    min-width: 0;
+    border: 1px solid rgba(181, 232, 255, 0.1);
+}
+
+#custom-launcher {
+    font-size: 14px;
+    color: #e192ef;
+    padding-left: 6px;
+    padding-right: 12px;
+}
+
+#network {
+    padding-left: 6px;
+    padding-right: 10px;
+}
+
+#workspaces button {
+    color: #565f89;
+    padding: 0 6px;
+    margin: 0;
+}
+
+#workspaces button.active {
+    color: #e192ef;
+}
