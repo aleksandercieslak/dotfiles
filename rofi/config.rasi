@@ -6,8 +6,6 @@ configuration {
     location: 0;
     disable-history: false;
     hide-scrollbar: true;
-    display-drun: "  Apps ";
-    display-run: "  Run ";
 }
-@theme "/home/alex/.config/rofi/my-theme.rasi"
+@theme "/home/alex/.config/rofi/theme.rasi"
 
