@@ -1,0 +1,13 @@
+configuration {
+    modi: "drun,run";
+    show-icons: true;
+    terminal: "kitty";
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    display-drun: "  Apps ";
+    display-run: "  Run ";
+}
+@theme "/home/alex/.config/rofi/my-theme.rasi"
+
