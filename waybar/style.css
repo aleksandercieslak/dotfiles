@@ -23,12 +23,7 @@ window#waybar {
 }
 
 
-#custom-theme {
-    font-size: 18px;
-}
-
-
-#custom-launcher {
+#custom-launcher, #custom-theme {
     font-size: 14px;
 }
 
