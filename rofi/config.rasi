@@ -7,5 +7,5 @@ configuration {
     disable-history: false;
     hide-scrollbar: true;
 }
-@theme "/home/alex/.config/rofi/theme.rasi"
+@theme "~/.config/rofi/theme.rasi"
 

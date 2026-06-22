@@ -409,7 +409,7 @@ hl.window_rule({
     match = { class = "nmtui_popup" },
     float = true,
     size = { 600, 400 },
-    move = "1190 50",
+    move = "1140 50",
 })
 
 hl.window_rule({
@@ -417,7 +417,7 @@ hl.window_rule({
     match = { class = "blueman-manager" },
     float = true,
     size = { 600, 400 },
-    move = "1220 50",
+    move = "1170 50",
 })
 
 hl.window_rule({
@@ -425,7 +425,7 @@ hl.window_rule({
     match = { class = "org.pulseaudio.pavucontrol" },
     float = true,
     size = { 600, 400 },
-    move = "1165 50",
+    move = "1110 50",
 })
 
 hl.window_rule({

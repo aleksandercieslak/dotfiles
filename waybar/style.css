@@ -2,24 +2,22 @@
     border: none;
     border-radius: 0;
     font-family: "Hack Nerd Font";
-    font-size: 14px;
+    font-size: 12px;
     min-height: 0;
+    min-width: 0;
+    color: #e192ef;
 }
 
 
 window#waybar {
-    background-color: rgba(23, 23, 23, 0.9);
+    background-color: rgba(23, 23, 23, 0.7);
     border-radius: 12px;
     margin: 8px 10px 0px 10px;
 }
 
 
-#custom-theme, #custom-window, #custom-media, #window, #custom-launcher, #clock, #workspaces, #battery, #backlight, #pulseaudio, #network, #bluetooth, #custom-exit, #custom-spotify, #cpu, #custom-gpu, #memory, #custom-updates, #custom-weather {
-    color: #e192ef;
-    padding: 0 12px 0 12px;
-    font-size: 11px;
-    min-height: 0;
-    min-width: 0;
+#custom-theme, #custom-window, #custom-media, #window, #custom-launcher, #clock, #workspaces, #battery, #backlight, #pulseaudio, #network, #bluetooth, #custom-exit, #custom-spotify, #cpu, #memory, #custom-updates, #custom-weather {
+    padding: 0 12px;
 }
 
 
@@ -28,14 +26,8 @@ window#waybar {
 }
 
 
-#network {
-    padding-left: 6px;
-    padding-right: 10px;
-}
-
-
 #workspaces button {
-    padding: 0 8px;
+    padding: 0 12px;
     color: #888888;
     border-radius: 8px;
     margin: 4px 2px;
@@ -48,3 +40,4 @@ window#waybar {
     background: rgba(255, 255, 255, 0.07);
     border-radius: 8px;
 }
+

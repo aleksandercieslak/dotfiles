@@ -6,9 +6,9 @@
     "margin-right": 250,
     "spacing": 0,
     "height": 30,
-    "modules-left": ["custom/launcher", "custom/theme", "custom/window", "hyprland/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["custom/media", "custom/updates", "custom/weather", "pulseaudio", "network", "bluetooth", "custom/exit"],
+    "modules-left": ["custom/theme", "clock", "hyprland/workspaces"],
+    "modules-center": ["custom/media"],
+    "modules-right": ["custom/updates", "custom/weather", "pulseaudio", "network", "bluetooth", "custom/exit"],
 
 
     "hyprland/workspaces": {
@@ -18,7 +18,7 @@
 
 
     "custom/theme": {
-        "format": "󰸌",
+        "format": "",
         "on-click": "~/.config/waybar/scripts/theme.sh",
         "tooltip": false
     },
@@ -32,13 +32,6 @@
     },
 
 
-    "custom/window": {
-  	"exec": "~/.config/waybar/scripts/window.sh",
-  	"interval": 0.5,
-  	"format": "{}",
-  	"tooltip": false
-    },
-
     "cpu": {
         "interval": 20,
         "format": " {usage}%"
@@ -48,13 +41,6 @@
     "memory": {
         "interval": 20,
         "format": " {used:0.1f}G/{total:0.1f}G"
-    },
-
-
-    "custom/gpu": {
-        "interval": 20,
-        "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
-        "format": "󰢮 {}%"
     },
 
 
@@ -68,7 +54,7 @@
 
 
     "custom/launcher": {
-        "format": "",
+        "format": "󰣇",
         "on-click": "rofi -show drun",
         "tooltip": false
     },
