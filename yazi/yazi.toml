@@ -1,0 +1,11 @@
+[opener]
+edit = [ { run = 'nvim "$@"', block = true } ]
+play = [ { run = 'mpv "$@"', orphan = true } ]
+
+[preview]
+max_width = 800
+max_height = 800
+
+[manager]
+show_hidden = true
+mouse_support = true

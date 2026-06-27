@@ -2,33 +2,18 @@
     "layer": "top",
     "position": "top",
     "margin-top": 5,
-    "margin-left": 250,
-    "margin-right": 250,
+    "margin-left": 500,
+    "margin-right": 500,
     "spacing": 0,
     "height": 30,
-    "modules-left": ["custom/theme", "clock", "hyprland/workspaces"],
+    "modules-left": ["custom/launcher", "clock", "hyprland/workspaces"],
     "modules-center": ["custom/media"],
-    "modules-right": ["custom/updates", "custom/weather", "pulseaudio", "network", "bluetooth", "custom/exit"],
+    "modules-right": ["pulseaudio", "network", "bluetooth", "custom/exit"],
 
 
     "hyprland/workspaces": {
         "format": "{id}",
         "on-click": "activate"
-    },
-
-
-    "custom/theme": {
-        "format": "",
-        "on-click": "~/.config/waybar/scripts/theme.sh",
-        "tooltip": false
-    },
-
-
-    "custom/weather": {
-  	"exec": "~/.config/waybar/scripts/weather.sh",
-  	"interval": 300,
-	"format": "{}",
-  	"tooltip": false
     },
 
 
@@ -54,7 +39,7 @@
 
 
     "custom/launcher": {
-        "format": "󰣇",
+        "format": "",
         "on-click": "rofi -show drun",
         "tooltip": false
     },

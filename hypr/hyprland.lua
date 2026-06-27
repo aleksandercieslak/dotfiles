@@ -123,7 +123,7 @@ hl.config({
         border_size = 2,
 
         col = {
-            active_border   = { colors = {"rgba(e192efff)", "rgba(b1baf4ff)"}, angle = 45 },
+            active_border   = { colors = {"rgba(8e8e8eff)", "rgba(262626ff)"}, angle = 45 },
             inactive_border = "rgba(171717aa)",
         },
 
@@ -409,7 +409,7 @@ hl.window_rule({
     match = { class = "nmtui_popup" },
     float = true,
     size = { 600, 400 },
-    move = "1140 50",
+    move = "890 50",
 })
 
 hl.window_rule({
@@ -417,7 +417,7 @@ hl.window_rule({
     match = { class = "blueman-manager" },
     float = true,
     size = { 600, 400 },
-    move = "1170 50",
+    move = "920 50",
 })
 
 hl.window_rule({
@@ -425,7 +425,7 @@ hl.window_rule({
     match = { class = "org.pulseaudio.pavucontrol" },
     float = true,
     size = { 600, 400 },
-    move = "1110 50",
+    move = "860 50",
 })
 
 hl.window_rule({

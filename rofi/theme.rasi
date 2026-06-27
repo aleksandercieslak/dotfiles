@@ -52,6 +52,6 @@ element-text {
 }
 
 element selected {
-    background-color: #e192ef;
+    background-color: #8e8e8e;
     text-color:       #000000;
 }
