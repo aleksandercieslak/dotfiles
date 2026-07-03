@@ -1,0 +1,206 @@
+(defvar expanded "false")
+(defvar active_panel "none")
+
+(deflisten current_time :initial "00:00"
+  `while true; do date +'%H:%M'; sleep 5; done`)
+
+(deflisten volume_level :initial "0"
+  `~/.config/eww/scripts/volume.sh`)
+
+(deflisten brightness_level :initial "0"
+  `~/.config/eww/scripts/brightness.sh`)
+
+(deflisten mic_level :initial "0"
+  `~/.config/eww/scripts/mic.sh`)
+
+(defpoll stats_data :interval "2s" :run-while {active_panel == "stats"} :initial "{}"
+  `~/.config/eww/scripts/stats.sh`)
+
+(deflisten media_data :initial "{}"
+  `~/.config/eww/scripts/media.sh`)
+
+(defpoll calendar_data :interval "10m" :initial "{}"
+  `~/.config/eww/scripts/calendar.sh`)
+
+(defpoll network_data :interval "5s" :run-while {active_panel == "connectivity"} :initial "{}"
+  `~/.config/eww/scripts/network.sh`)
+
+(defpoll bluetooth_data :interval "5s" :run-while {active_panel == "connectivity"} :initial "{}"
+  `~/.config/eww/scripts/bluetooth.sh`)
+
+(defwidget pill_idle []
+  (eventbox :onclick `eww update expanded=$(if [ "${expanded}" = "true" ]; then echo false; else echo true; fi)`
+    (box :class "pill-idle" :orientation "h" :space-evenly false :halign "center"
+      (label :class "pill-time" :text current_time))))
+
+(defwidget nav_button [icon panel]
+  (eventbox :onclick `eww update active_panel="${panel}"`
+    (box :class {active_panel == panel ? "nav-btn nav-btn-active" : "nav-btn"}
+      (label :text icon))))
+
+(defwidget nav_row []
+  (box :class "nav-row" :orientation "h" :space-evenly true :halign "fill"
+    (nav_button :icon "" :panel "calendar")
+    (nav_button :icon "󱜅" :panel "media")
+    (nav_button :icon "" :panel "controls")
+    (nav_button :icon "" :panel "stats")
+    (nav_button :icon "󱘖" :panel "connectivity")
+    (nav_button :icon "󰀻" :panel "toggles")
+    (nav_button :icon "⏼" :panel "power")))
+
+(defwidget controls_panel []
+  (box :orientation "v" :space-evenly false :class "panel-content" :vexpand false
+    (box :orientation "h" :space-evenly false
+      (label :class "panel-label" :text "󰕾  Volume")
+      (label :class "panel-value" :text "${volume_level}%" :hexpand true :halign "end"))
+    (scale :class "slider"
+           :value volume_level
+           :min 0
+           :max 100
+           :vexpand false
+           :onchange `wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%`)
+    (box :orientation "h" :space-evenly false
+      (label :class "panel-label" :text "󰃠  Brightness")
+      (label :class "panel-value" :text "${brightness_level}%" :hexpand true :halign "end"))
+    (scale :class "slider"
+           :value brightness_level
+           :min 0
+           :max 100
+           :vexpand false
+           :onchange `brightnessctl set {}%`)
+    (box :orientation "h" :space-evenly false
+      (label :class "panel-label" :text "  Microphone")
+      (label :class "panel-value" :text "${mic_level}%" :hexpand true :halign "end"))
+    (scale :class "slider"
+           :value mic_level
+           :min 0
+           :max 100
+           :vexpand false
+           :onchange `wpctl set-volume @DEFAULT_AUDIO_SOURCE@ {}%`)))
+
+(defwidget week_pill [label day today]
+  (box :orientation "v" :space-evenly false :class {day == today ? "week-pill week-pill-today" : "week-pill"} :halign "center"
+    (label :class "week-pill-label" :text label)
+    (label :class "week-pill-day" :text "${day}")))
+
+(defwidget calendar_panel []
+  (box :orientation "v" :space-evenly false :class "panel-content" :halign "center" :vexpand false
+    (label :class "cal-time" :text current_time)
+    (label :class "cal-date" :text {replace(jq(calendar_data, ".date"), "\"", "")})
+    (box :orientation "h" :space-evenly true :class "week-strip" :halign "fill"
+      (for w in {jq(calendar_data, ".week")}
+        (week_pill :label {w.label} :day {w.day} :today {jq(calendar_data, ".today")})))))
+
+(defwidget stat_row [label value]
+  (box :orientation "v" :space-evenly false :class "stat-row"
+    (box :orientation "h" :space-evenly false
+      (label :class "stat-label" :halign "start" :text label)
+      (label :class "stat-value" :hexpand true :halign "end" :text "${value}%"))
+    (progress :class "stat-bar" :value value :vexpand false)))
+
+(defwidget stats_panel []
+  (box :orientation "v" :space-evenly false :class "panel-content" :vexpand false
+    (stat_row :label "  CPU" :value {jq(stats_data, ".cpu")})
+    (stat_row :label "󰷜  GPU" :value {jq(stats_data, ".gpu")})
+    (stat_row :label "  RAM" :value {jq(stats_data, ".ram")})
+    (stat_row :label "󰋊  Disk" :value {jq(stats_data, ".disk")})
+    (stat_row :label "  Battery" :value {jq(stats_data, ".battery")})))
+
+(defwidget power_button [label action]
+  (eventbox :onclick action
+    (box :class "power-btn"
+      (label :text label))))
+
+(defwidget power_panel []
+  (box :orientation "v" :space-evenly false :class "panel-content" :vexpand false
+    (power_button :label "  Lock" :action "hyprlock &")
+    (power_button :label "󰤄  Sleep" :action "systemctl suspend")
+    (power_button :label "󰍃  Logout" :action "loginctl terminate-user $USER")
+    (power_button :label "󰜉  Reboot" :action "systemctl reboot")
+    (power_button :label "  Shutdown" :action "systemctl poweroff")))
+
+(defwidget media_panel []
+  (box :orientation "v" :space-evenly false :class "panel-content" :halign "center" :vexpand false
+    (box :class "media-art"
+      (box :visible {jq(media_data, ".art") != "\"\""}
+        (image :path {replace(jq(media_data, ".art"), "\"", "")} :image-width 120 :image-height 120)))
+    (label :class "media-title" :text {replace(jq(media_data, ".title"), "\"", "")})
+    (label :class "media-artist" :text {replace(jq(media_data, ".artist"), "\"", "")})
+    (box :orientation "h" :space-evenly true :class "media-controls"
+      (eventbox :onclick "playerctl previous" (label :class "media-icon" :text "󰒮"))
+      (eventbox :onclick "playerctl play-pause" (label :class "media-icon" :text {jq(media_data, ".status") == "\"Playing\"" ? "" : ""}))
+      (eventbox :onclick "playerctl next" (label :class "media-icon" :text "󰒭")))
+    (progress :class "media-progress" :value {jq(media_data, ".pct")} :vexpand false)))
+
+(defwidget wifi_network_row [ssid signal secured]
+  (eventbox :onclick `nmcli dev wifi connect "${ssid}"`
+    (box :orientation "h" :space-evenly false :class "conn-item"
+      (label :class "conn-item-label" :halign "start" :hexpand true :text ssid)
+      (label :class "conn-item-meta" :text "${signal}%"))))
+
+(defwidget bt_device_row [name mac connected]
+  (eventbox :onclick {connected ? "bluetoothctl disconnect ${mac}" : "bluetoothctl connect ${mac}"}
+    (box :orientation "h" :space-evenly false :class "conn-item"
+      (label :class "conn-item-label" :halign "start" :hexpand true :text name)
+      (label :class "conn-item-meta" :text {connected ? "on" : ""}))))
+
+(defwidget connectivity_panel []
+  (box :orientation "v" :space-evenly false :class "panel-content" :vexpand false
+    (box :orientation "h" :space-evenly false :class "conn-section-header"
+      (label :class "panel-label" :hexpand true :halign "start" :text "  Wi-Fi")
+      (eventbox :onclick {jq(network_data, ".enabled") == "true" ? "nmcli radio wifi off" : "nmcli radio wifi on"}
+        (label :class {jq(network_data, ".enabled") == "true" ? "toggle-pill toggle-on" : "toggle-pill"} :text {jq(network_data, ".enabled") == "true" ? "on" : "off"})))
+    (label :class "conn-current" :halign "start" :text {jq(network_data, ".current") == "" ? "Not connected" : replace(jq(network_data, ".current"), "\"", "")})
+    (box :orientation "v" :space-evenly false :class "conn-list"
+      (for n in {jq(network_data, ".networks")}
+        (wifi_network_row :ssid {n.ssid} :signal {n.signal} :secured {n.secured})))
+    (box :orientation "h" :space-evenly false :class "conn-section-header"
+      (label :class "panel-label" :hexpand true :halign "start" :text "󰂯  Bluetooth")
+      (eventbox :onclick {jq(bluetooth_data, ".enabled") == "true" ? "bluetoothctl power off" : "bluetoothctl power on"}
+        (label :class {jq(bluetooth_data, ".enabled") == "true" ? "toggle-pill toggle-on" : "toggle-pill"} :text {jq(bluetooth_data, ".enabled") == "true" ? "on" : "off"})))
+    (box :orientation "v" :space-evenly false :class "conn-list"
+      (for d in {jq(bluetooth_data, ".devices")}
+        (bt_device_row :name {d.name} :mac {d.mac} :connected {d.connected})))))
+
+(defwidget shortcut_button [label action]
+  (eventbox :onclick `bash -c "${action} & disown"`
+    (box :class "shortcut-btn"
+      (label :text label))))
+
+(defwidget shortcuts_panel []
+  (box :orientation "v" :space-evenly false :class "panel-content" :vexpand false
+    (shortcut_button :label "󰨞  VS Code" :action "code")
+    (shortcut_button :label "  Neovim" :action "kitty -e nvim")
+    (shortcut_button :label "󰈹  LibreWolf" :action "librewolf")
+    (shortcut_button :label "  Yazi" :action "kitty -e yazi")
+    (shortcut_button :label "  Kitty" :action "kitty")))
+
+(defwidget panel_content []
+  (box :orientation "v" :space-evenly false :vexpand false :homogeneous false
+    (box :visible {active_panel == "calendar"} :vexpand false :hexpand false (calendar_panel))
+    (box :visible {active_panel == "media"} :vexpand false :hexpand false (media_panel))
+    (box :visible {active_panel == "controls"} :vexpand false :hexpand false (controls_panel))
+    (box :visible {active_panel == "stats"} :vexpand false :hexpand false (stats_panel))
+    (box :visible {active_panel == "connectivity"} :vexpand false :hexpand false (connectivity_panel))
+    (box :visible {active_panel == "toggles"} :vexpand false :hexpand false (shortcuts_panel))
+    (box :visible {active_panel == "power"} :vexpand false :hexpand false (power_panel))))
+
+(defwidget control_center []
+  (box :orientation "v" :space-evenly false :class "control-center" :vexpand false
+    (nav_row)
+    (revealer :transition "slidedown" :reveal {active_panel != "none"} :duration "300ms"
+      (panel_content))))
+
+(defwidget island []
+  (box :class {expanded == "true" ? "island island-expanded" : "island"} :orientation "v" :space-evenly false :vexpand false
+    (pill_idle)
+    (revealer :transition "slidedown" :reveal expanded :duration "320ms"
+      (control_center))))
+
+(defwindow island
+  :monitor 0
+  :geometry (geometry :x "0" :y "6px" :width "1px" :height "1px" :anchor "top center")
+  :stacking "overlay"
+  :exclusive true 
+  (island))
+
