@@ -117,9 +117,6 @@
     min-width: 26px;
     transition: all 180ms cubic-bezier(0.4, 0.0, 0.2, 1);
 }
-.week-pill:hover {
-    background-color: rgba(255, 255, 255, 0.12);
-}
 .week-pill-label {
     font-size: 10px;
     color: #999999;
@@ -166,28 +163,18 @@
     min-height: 6px;
 }
 .power-btn {
-    padding: 12px;
-    margin-top: 0px;
-    margin-bottom: 6px;
-    margin-left: 0px;
-    margin-right: 0px;
     border-radius: 12px;
     background-color: rgba(255, 255, 255, 0.05);
+    transition: all 180ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+.power-btn-label {
+    margin: 12px 12px 18px 12px;
     color: #ffffff;
     font-size: 13px;
     font-weight: 600;
-    transition: all 180ms cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 .power-btn:hover {
     background-color: rgba(255, 255, 255, 0.25);
-}
-.power-btn:active {
-    padding: 9px;
-    margin-top: 3px;
-    margin-bottom: 9px;
-    margin-left: 3px;
-    margin-right: 3px;
-    background-color: rgba(255, 255, 255, 0.15);
 }
 .media-art {
     min-width: 120px;
@@ -223,14 +210,6 @@
 }
 .media-icon:hover {
     background-color: rgba(255, 255, 255, 0.25);
-}
-.media-icon:active {
-    padding: 13px 21px;
-    margin-top: -3px;
-    margin-bottom: -3px;
-    margin-left: -3px;
-    margin-right: -3px;
-    background-color: rgba(255, 255, 255, 0.4);
 }
 .media-progress {
     min-height: 5px;
@@ -291,26 +270,53 @@
     color: #000000;
 }
 .shortcut-btn {
-    padding: 12px;
-    margin-top: 0px;
-    margin-bottom: 6px;
-    margin-left: 0px;
-    margin-right: 0px;
     border-radius: 12px;
     background-color: rgba(255, 255, 255, 0.05);
+    transition: all 180ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+.shortcut-btn-label {
+    margin: 12px 12px 18px 12px;
     color: #ffffff;
     font-size: 13px;
     font-weight: 600;
-    transition: all 180ms cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 .shortcut-btn:hover {
     background-color: rgba(255, 255, 255, 0.25);
 }
+.nav-btn:active {
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 80ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+.power-btn:active {
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 80ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
 .shortcut-btn:active {
-    padding: 9px;
-    margin-top: 3px;
-    margin-bottom: 9px;
-    margin-left: 3px;
-    margin-right: 3px;
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 80ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+.media-icon:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    transition: all 80ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+.toggle-pill:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    transition: all 80ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+.conn-item:active {
+    background-color: rgba(255, 255, 255, 0.18);
+    transition: all 80ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+.slider slider:hover {
+    background-color: #ffffff;
+    min-width: 18px;
+    min-height: 18px;
+    margin: -7px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+.slider slider:active {
+    min-width: 20px;
+    min-height: 20px;
+    margin: -8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }

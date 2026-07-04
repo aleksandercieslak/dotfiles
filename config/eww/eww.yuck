@@ -34,8 +34,8 @@
       (label :class "pill-time" :text current_time))))
 
 (defwidget nav_button [icon panel]
-  (eventbox :onclick `eww update active_panel="${panel}"`
-    (box :class {active_panel == panel ? "nav-btn nav-btn-active" : "nav-btn"}
+  (eventbox :onclick `eww update active_panel="${panel}"` :class {active_panel == panel ? "nav-btn nav-btn-active" : "nav-btn"}
+    (box
       (label :text icon))))
 
 (defwidget nav_row []
@@ -107,9 +107,8 @@
     (stat_row :label "  Battery" :value {jq(stats_data, ".battery")})))
 
 (defwidget power_button [label action]
-  (eventbox :onclick action
-    (box :class "power-btn"
-      (label :text label))))
+  (eventbox :onclick action :class "power-btn" :hexpand true :halign "fill"
+    (label :class "power-btn-label" :text label)))
 
 (defwidget power_panel []
   (box :orientation "v" :space-evenly false :class "panel-content" :vexpand false
@@ -127,20 +126,20 @@
     (label :class "media-title" :text {replace(jq(media_data, ".title"), "\"", "")})
     (label :class "media-artist" :text {replace(jq(media_data, ".artist"), "\"", "")})
     (box :orientation "h" :space-evenly true :class "media-controls"
-      (eventbox :onclick "playerctl previous" (label :class "media-icon" :text "󰒮"))
-      (eventbox :onclick "playerctl play-pause" (label :class "media-icon" :text {jq(media_data, ".status") == "\"Playing\"" ? "" : ""}))
-      (eventbox :onclick "playerctl next" (label :class "media-icon" :text "󰒭")))
+      (eventbox :onclick "playerctl previous" :class "media-icon" (label :text "󰒮"))
+      (eventbox :onclick "playerctl play-pause" :class "media-icon" (label :text {jq(media_data, ".status") == "\"Playing\"" ? "" : ""}))
+      (eventbox :onclick "playerctl next" :class "media-icon" (label :text "󰒭")))
     (progress :class "media-progress" :value {jq(media_data, ".pct")} :vexpand false)))
 
 (defwidget wifi_network_row [ssid signal secured]
-  (eventbox :onclick `nmcli dev wifi connect "${ssid}"`
-    (box :orientation "h" :space-evenly false :class "conn-item"
+  (eventbox :onclick `nmcli dev wifi connect "${ssid}"` :class "conn-item"
+    (box :orientation "h" :space-evenly false
       (label :class "conn-item-label" :halign "start" :hexpand true :text ssid)
       (label :class "conn-item-meta" :text "${signal}%"))))
 
 (defwidget bt_device_row [name mac connected]
-  (eventbox :onclick {connected ? "bluetoothctl disconnect ${mac}" : "bluetoothctl connect ${mac}"}
-    (box :orientation "h" :space-evenly false :class "conn-item"
+  (eventbox :onclick {connected ? "bluetoothctl disconnect ${mac}" : "bluetoothctl connect ${mac}"} :class "conn-item"
+    (box :orientation "h" :space-evenly false
       (label :class "conn-item-label" :halign "start" :hexpand true :text name)
       (label :class "conn-item-meta" :text {connected ? "on" : ""}))))
 
@@ -148,24 +147,23 @@
   (box :orientation "v" :space-evenly false :class "panel-content" :vexpand false
     (box :orientation "h" :space-evenly false :class "conn-section-header"
       (label :class "panel-label" :hexpand true :halign "start" :text "  Wi-Fi")
-      (eventbox :onclick {jq(network_data, ".enabled") == "true" ? "nmcli radio wifi off" : "nmcli radio wifi on"}
-        (label :class {jq(network_data, ".enabled") == "true" ? "toggle-pill toggle-on" : "toggle-pill"} :text {jq(network_data, ".enabled") == "true" ? "on" : "off"})))
+      (eventbox :onclick {jq(network_data, ".enabled") == "true" ? "nmcli radio wifi off" : "nmcli radio wifi on"} :class {jq(network_data, ".enabled") == "true" ? "toggle-pill toggle-on" : "toggle-pill"}
+        (label :text {jq(network_data, ".enabled") == "true" ? "on" : "off"})))
     (label :class "conn-current" :halign "start" :text {jq(network_data, ".current") == "" ? "Not connected" : replace(jq(network_data, ".current"), "\"", "")})
     (box :orientation "v" :space-evenly false :class "conn-list"
       (for n in {jq(network_data, ".networks")}
         (wifi_network_row :ssid {n.ssid} :signal {n.signal} :secured {n.secured})))
     (box :orientation "h" :space-evenly false :class "conn-section-header"
       (label :class "panel-label" :hexpand true :halign "start" :text "󰂯  Bluetooth")
-      (eventbox :onclick {jq(bluetooth_data, ".enabled") == "true" ? "bluetoothctl power off" : "bluetoothctl power on"}
-        (label :class {jq(bluetooth_data, ".enabled") == "true" ? "toggle-pill toggle-on" : "toggle-pill"} :text {jq(bluetooth_data, ".enabled") == "true" ? "on" : "off"})))
+      (eventbox :onclick {jq(bluetooth_data, ".enabled") == "true" ? "bluetoothctl power off" : "bluetoothctl power on"} :class {jq(bluetooth_data, ".enabled") == "true" ? "toggle-pill toggle-on" : "toggle-pill"}
+        (label :text {jq(bluetooth_data, ".enabled") == "true" ? "on" : "off"})))
     (box :orientation "v" :space-evenly false :class "conn-list"
       (for d in {jq(bluetooth_data, ".devices")}
         (bt_device_row :name {d.name} :mac {d.mac} :connected {d.connected})))))
 
 (defwidget shortcut_button [label action]
-  (eventbox :onclick `bash -c "${action} & disown"`
-    (box :class "shortcut-btn"
-      (label :text label))))
+  (eventbox :onclick `bash -c "${action} & disown"` :class "shortcut-btn" :hexpand true :halign "fill"
+    (label :class "shortcut-btn-label" :text label)))
 
 (defwidget shortcuts_panel []
   (box :orientation "v" :space-evenly false :class "panel-content" :vexpand false
