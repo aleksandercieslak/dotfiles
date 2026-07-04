@@ -29,7 +29,7 @@
   `~/.config/eww/scripts/bluetooth.sh`)
 
 (defwidget pill_idle []
-  (eventbox :onclick `eww update expanded=$(if [ "${expanded}" = "true" ]; then echo false; else echo true; fi)`
+  (eventbox :onclick `eww update expanded=$(if [ "${expanded}" = "true" ]; then echo false; else echo true; fi)` :class {expanded == "true" ? "island island-expanded" : "island"}
     (box :class "pill-idle" :orientation "h" :space-evenly false :halign "center"
       (label :class "pill-time" :text current_time))))
 
