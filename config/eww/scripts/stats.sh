@@ -19,7 +19,7 @@ get_disk() {
 }
 get_battery() {
   cap=$(cat /sys/class/power_supply/BAT0/capacity 2>/dev/null)
-  if [ -z "$cap" ]; then echo -1; else echo "$cap"; fi
+  if [ -z "$cap" ]; then echo 100; else echo "$cap"; fi
 }
 get_gpu() {
   if command -v nvidia-smi &> /dev/null; then

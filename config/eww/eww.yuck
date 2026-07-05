@@ -67,7 +67,7 @@
            :min 0
            :max 100
            :vexpand false
-           :onchange `brightnessctl set {}%`)
+           :onchange `bash -c 'device=$(brightnessctl -l | grep "class \x27backlight\x27" | head -1 | sed -n "s/Device .\(.*\). of.*/\1/p"); [ -n "$device" ] && brightnessctl -d "$device" set {}%'`)
     (box :orientation "h" :space-evenly false
       (label :class "panel-label" :text "  Microphone")
       (label :class "panel-value" :text "${mic_level}%" :hexpand true :halign "end"))

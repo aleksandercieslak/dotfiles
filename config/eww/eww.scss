@@ -28,20 +28,30 @@
     margin-top: 6px;
 }
 .nav-btn {
-    padding: 8px 12px;
     margin: 0 3px;
     border-radius: 12px;
-    color: #999999;
-    font-size: 16px;
     transition: all 180ms cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 .nav-btn:hover {
     background-color: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
 }
 .nav-btn-active {
     background-color: rgba(255, 255, 255, 0.15);
+}
+.nav-btn-inner {
+    padding: 8px 12px;
+    color: #999999;
+    font-size: 16px;
+    transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+.nav-btn:hover > .nav-btn-inner {
     color: #ffffff;
+}
+.nav-btn-active > .nav-btn-inner {
+    color: #ffffff;
+}
+.nav-btn:active > .nav-btn-inner {
+    padding: 10px 14px;
 }
 .control-center {
     min-width: 400px;
