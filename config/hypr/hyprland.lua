@@ -302,6 +302,9 @@ hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("rofi -show drun"))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
+hl.bind("F12", hl.dsp.exec_cmd("grim ~/Pictures/screenshots/$(date +%Y%m%d-%H%M%S).png"))
+hl.bind(mainMod .. " + F12", hl.dsp.exec_cmd("grim -g \"$(slurp)\" ~/Pictures/screenshots/$(date +%Y%m%d-%H%M%S).png"))
+
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
@@ -403,30 +406,6 @@ hl.window_rule({
     name = "vs-code-opaque",
     match = { class = "code" },
     opaque = true,
-})
-
-hl.window_rule({
-    name = "wifi-pop",
-    match = { class = "nmtui_popup" },
-    float = true,
-    size = { 600, 400 },
-    move = "890 50",
-})
-
-hl.window_rule({
-    name = "blue-pop",
-    match = { class = "blueman-manager" },
-    float = true,
-    size = { 600, 400 },
-    move = "920 50",
-})
-
-hl.window_rule({
-    name = "audio-pop",
-    match = { class = "org.pulseaudio.pavucontrol" },
-    float = true,
-    size = { 600, 400 },
-    move = "860 50",
 })
 
 hl.window_rule({
