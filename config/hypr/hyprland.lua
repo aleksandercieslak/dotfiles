@@ -71,7 +71,7 @@ local menu        = "rofi -show drun"
 -- end)
 
 hl.on("hyprland.start", function ()
-     hl.exec_cmd("~/.config/eww/scripts/fullscreen-watch.sh")	
+     hl.exec_cmd("~/.config/eww/scripts/fullscreen-watch.sh")
      hl.exec_cmd("~/.config/eww/scripts/open-island.sh")
      hl.exec_cmd("hyprpaper")
      hl.exec_cmd("mako")

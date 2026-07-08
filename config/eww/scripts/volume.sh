@@ -5,7 +5,3 @@ print_vol() {
   echo "$pct"
 }
 print_vol
-while true; do
-  sleep 1
-  print_vol
-done

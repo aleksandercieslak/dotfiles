@@ -5,7 +5,3 @@ print_mic() {
   echo "$pct"
 }
 print_mic
-while true; do
-  sleep 1
-  print_mic
-done

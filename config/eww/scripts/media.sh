@@ -54,7 +54,3 @@ print_media() {
 }
 
 print_media
-while true; do
-  sleep 1
-  print_media
-done

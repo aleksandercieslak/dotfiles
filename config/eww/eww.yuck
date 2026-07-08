@@ -4,19 +4,19 @@
 (deflisten current_time :initial "00:00"
   `while true; do date +'%H:%M'; sleep 5; done`)
 
-(deflisten volume_level :initial "0"
+(defpoll volume_level :interval "1s" :run-while {active_panel == "controls"} :initial "0"
   `~/.config/eww/scripts/volume.sh`)
 
-(deflisten brightness_level :initial "0"
+(defpoll brightness_level :interval "1s" :run-while {active_panel == "controls"} :initial "0"
   `~/.config/eww/scripts/brightness.sh`)
 
-(deflisten mic_level :initial "0"
+(defpoll mic_level :interval "1s" :run-while {active_panel == "controls"} :initial "0"
   `~/.config/eww/scripts/mic.sh`)
 
 (defpoll stats_data :interval "2s" :run-while {active_panel == "stats"} :initial "{}"
   `~/.config/eww/scripts/stats.sh`)
 
-(deflisten media_data :initial "{}"
+(defpoll media_data :interval "1s" :run-while {active_panel == "media"} :initial "{}"
   `~/.config/eww/scripts/media.sh`)
 
 (defpoll calendar_data :interval "10m" :initial "{}"
