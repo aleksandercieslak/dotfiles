@@ -2,27 +2,12 @@
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
 
   "logo": {
-    "type": "small",
-    "source": "arch",
-    "padding": {
-	"top": 3,
-	"left": 3
-    },
-    "color": {
-        "1": "#89dceb",
-	"2": "#74c7ec"
-    }
+    "type": "kitty-icat",
+    "source": "~/.config/assets/fastfetch.png"
   },
 
   "modules": [
-    {
-      "type": "title",
-      "color": {
-      	"user": "magenta",
-	"at": "white",
-	"host": "magenta"
-      }
-    },
+    "title",
 
     {
       "type": "separator",
@@ -31,57 +16,53 @@
 
     {
       "type": "os",
-      "key": "󰣇 os",
-      "format": "{pretty-name}",
-      "keyColor": "blue"
+      "key": " os",
+      "format": "{pretty-name}"
+    },
+    {
+      "type": "kernel",
+      "key": " kernel",
+      "format": "{sysname}"
     },
     {
       "type": "uptime",
-      "key": "󱑒 uptime",
-      "keyColor": "yellow"
+      "key": "󱑒 uptime"
     },
     {
       "type": "shell",
       "key": " shell",
-      "format": "{process-name}",
-      "keyColor": "green"
+      "format": "{process-name}"
     },
     {
       "type": "wm",
       "key": " wm",
-      "format": "{pretty-name}",
-      "keyColor": "red"
+      "format": "{pretty-name}"
     },
     {
       "type": "terminal",
       "key": " terminal",
-      "format": "{pretty-name}",
-      "keyColor": "magenta"
+      "format": "{pretty-name}"
     },
     {
       "type": "cpu",
       "key": " cpu",
-      "format": "{name}",
-      "keyColor": "blue"
+      "format": "{name}"
     },
     {
       "type": "gpu",
       "key": "󰷜 gpu",
-      "format": "{name}",
-      "keyColor": "yellow"
+      "format": "{name}"
     },
     {
       "type": "memory",
       "key": " memory",
-      "format": "{used}/{total}",
-      "keyColor": "green"
+      "format": "{used}/{total}"
     },
     {
       "type": "disk",
       "folders": "/",
       "key": "󰋊 disk",
-      "format": "{size-used}/{size-total}",
-      "keyColor": "red"
+      "format": "{size-used}/{size-total}"
     },
 
     {
