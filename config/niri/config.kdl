@@ -1,7 +1,7 @@
 input {
     keyboard {
         xkb {
-	    layout "pl"
+	    layout "us"
         }
     }
     touchpad {
@@ -96,7 +96,6 @@ window-rule {
 }
 
 window-rule {
-    match app-id="code"
     match app-id="librewolf"
 
     opacity 1.0
@@ -110,7 +109,7 @@ binds {
     Mod+E { spawn "foot" "yazi"; }
     Mod+C { spawn "foot" "nvim"; }
     Mod+B { spawn "librewolf"; }
-    Mod+Shift+L { spawn "swaylock"; }
+    Mod+Alt+L { spawn "swaylock"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
@@ -125,38 +124,38 @@ binds {
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
     
-    Mod+O repeat=false { toggle-overview; }
+    Mod+Tab repeat=false { toggle-overview; }
     Mod+Q repeat=false { close-window; }
     
-    Mod+Left  { focus-column-left; } // Switch to hjkl eventually
-    Mod+Down  { focus-window-down; }
-    Mod+Up    { focus-window-up; }
-    Mod+Right { focus-column-right; }
+    Mod+H  { focus-column-left; }
+    Mod+J  { focus-window-down; }
+    Mod+K  { focus-window-up; }
+    Mod+L  { focus-column-right; }
     
-    Mod+Ctrl+Left  { move-column-left; }
-    Mod+Ctrl+Down  { move-window-down; }
-    Mod+Ctrl+Up    { move-window-up; }
-    Mod+Ctrl+Right { move-column-right; }
+    Mod+Ctrl+H  { move-column-left; }
+    Mod+Ctrl+J  { move-window-down; }
+    Mod+Ctrl+K  { move-window-up; }
+    Mod+Ctrl+L  { move-column-right; }
 
-    Mod+Home { focus-column-first; } // Find alternative vim-like keys for this section
-    Mod+End  { focus-column-last; }
-    Mod+Ctrl+Home { move-column-to-first; }
-    Mod+Ctrl+End  { move-column-to-last; }
+    Mod+Y { focus-column-first; }
+    Mod+O  { focus-column-last; }
+    Mod+Ctrl+Y { move-column-to-first; }
+    Mod+Ctrl+O  { move-column-to-last; }
 
-    Mod+Shift+Left  { focus-monitor-left; }
-    Mod+Shift+Down  { focus-monitor-down; }
-    Mod+Shift+Up    { focus-monitor-up; }
-    Mod+Shift+Right { focus-monitor-right; }
+    Mod+Shift+H  { focus-monitor-left; }
+    Mod+Shift+J  { focus-monitor-down; }
+    Mod+Shift+K  { focus-monitor-up; }
+    Mod+Shift+L  { focus-monitor-right; }
 
-    Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
-    Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
-    Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
-    Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+    Mod+Shift+Ctrl+H  { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+J  { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+K  { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+L  { move-column-to-monitor-right; }
 
-    Mod+Page_Down      { focus-workspace-down; } // Use U instead of Page_Down and I instead of Page_Up
-    Mod+Page_Up        { focus-workspace-up; }
-    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
-    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
+    Mod+U      { focus-workspace-down; }
+    Mod+I        { focus-workspace-up; }
+    Mod+Ctrl+U { move-column-to-workspace-down; }
+    Mod+Ctrl+I   { move-column-to-workspace-up; }
 
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
@@ -197,8 +196,8 @@ binds {
 
     Shift+Print { screenshot; }
     Print { screenshot-screen; }
-    Shift+F12 { screenshot; }
-    F12 { screenshot-screen; } 
+    Mod+Shift+F12 { screenshot; }
+    Mod+F12 { screenshot-screen; } 
 
     Mod+Escape { quit; }
 }
