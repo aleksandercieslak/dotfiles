@@ -1,0 +1,22 @@
+color=1e1e2e
+font=JetBrainsMono Nerd Font
+font-size=24
+
+inside-color=1e1e2e
+inside-clear-color=89b4fa
+inside-caps-lock-color=f9e2af
+inside-ver-color=a6e3a1
+inside-wrong-color=f38ba8
+
+ring-color=45475a
+ring-clear-color=89b4fa
+ring-caps-lock-color=f9e2af
+ring-ver-color=a6e3a1
+ring-wrong-color=f38ba8
+
+line-color=00000000
+
+text-color=1e1e2e
+text-clear-color=1e1e2e
+text-ver-color=1e1e2e
+text-wrong-color=1e1e2e
