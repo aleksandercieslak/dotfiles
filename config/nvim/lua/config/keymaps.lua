@@ -22,6 +22,7 @@ vim.keymap.set({ "n", "x", "o" }, "S", function() require("flash").treesitter() 
 vim.keymap.set("n", "<F5>", function()
   vim.cmd("write")
   local file = vim.fn.expand("%:p")
+  local name = vim.fn.expand("%:t:r")
   local out = "/tmp/" .. name 
   local cmd = "g++ -std=c++17 -O2 -Wall -Wextra -Wshadow -fsanitize=address,undefined -DLOCAL " .. file .. " -o " .. out .. " && " .. out
   require("toggleterm").exec(cmd)
