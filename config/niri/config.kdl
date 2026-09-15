@@ -76,6 +76,14 @@ spawn-at-startup "mako"
 spawn-at-startup "swaybg" "-i" "/home/alex/.config/assets/forest.png"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
+spawn-at-startup "swayidle" "-w" \
+    "timeout" "300" "brightnessctl set 20%-" \
+    "resume" "brightnessctl set 100%" \
+    "timeout" "600" "swaylock -f" \
+    "timeout" "601" "niri msg action power-off-monitors" \
+    "resume" "niri msg action power-on-monitors" \
+    "timeout" "1800" "systemctl suspend" \
+    "before-sleep" "swaylock -f"
 
 hotkey-overlay {
     skip-at-startup
