@@ -113,7 +113,7 @@ binds {
     Mod+SPACE { spawn "fuzzel"; }
     Mod+E { spawn "foot" "yazi"; }
     Mod+C { spawn "foot" "nvim"; }
-    Mod+B { spawn "librewolf"; }
+    Mod+B { spawn "zen-browser"; }
     Mod+Alt+L { spawn "swaylock"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
