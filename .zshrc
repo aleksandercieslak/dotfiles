@@ -14,7 +14,7 @@ alias ga='git add .'
 alias gc='git commit -m'
 alias gp='git push'
 
-alias oi='cd ~/Projects/OI' 
+alias cp='cd ~/Projects/competitive-programming/' 
 
 PROMPT=$'\n%F{blue}%~%f\n%(?.%F{magenta}.%F{red})❯❯%f '
 
